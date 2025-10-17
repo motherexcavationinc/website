@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mother Excavation Inc</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="nav">
+      <a class="brand" href="#">
+        <img src="logo.png" alt="Logo" />Mother Excavation
+      </a>
+
+      <nav class="links">
+        <ul>
+          <li><a href="#services"><span>Services</span><span>Services</span></a></li>
+          <li><a href="#about"><span>About</span><span>About</span></a></li>
+          <li><a href="#contact"><span>Contact</span><span>Contact</span></a></li>
+        </ul>
+      </nav>
+
+      <a class="btn" href="#contact">Let's Chat!</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner container">
+      <div class="eyebrow">Mother Excavation Inc</div>
+      <h1 class="h1">Excavation • Hauling • Demolition • Dumpster Services</h1>
+      <p class="lead">
+        We specialize in complete site preparation — from digging and grading to hauling debris and delivering dumpsters. 
+        Whether residential or commercial, we deliver reliable results and a clean jobsite every time.
+      </p>
+      <div class="hero-actions">
+        <a class="btn" href="#contact">Get a Free Quote</a>
+        <a class="btn" style="background:transparent;color:#fff;border-color:var(--brand)" href="#services">View Services</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <div class="container">
+      <div class="services-head">
+        <div class="eyebrow">Our Services</div>
+        <h2 class="h2">Heavy-Duty Work Done Right</h2>
+      </div>
+
+      <div class="cards">
+        <!-- Excavation -->
+        <article class="card">
+          <div class="card-media">
+            <img src="excavation.jpg" alt="Excavation work site" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Excavation</h3>
+            <p class="card-sub">
+              From precise grading to large-scale digging — our excavation crews deliver clean, accurate work with modern equipment.
+            </p>
+          </div>
+        </article>
+
+        <!-- Hauling -->
+        <article class="card">
+          <div class="card-media">
+            <img src="hauling.jpg" alt="Hauling materials truck" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Hauling Materials</h3>
+            <p class="card-sub">
+              Need materials moved? We haul dirt, gravel, stone, and debris safely and efficiently across Northern Virginia.
+            </p>
+          </div>
+        </article>
+
+        <!-- Demolition -->
+        <article class="card">
+          <div class="card-media">
+            <img src="demolition.jpg" alt="Demolition project in progress" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Demolition</h3>
+            <p class="card-sub">
+              We handle full or partial demolition projects — residential, commercial, or industrial — with safety and precision.
+            </p>
+          </div>
+        </article>
+
+        <!-- Dumpster Services -->
+        <article class="card">
+          <div class="card-media">
+            <img src="dumpster.jpg" alt="Dumpster rental service" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Dumpster Services</h3>
+            <p class="card-sub">
+              On-demand dumpster rentals for construction cleanup, debris removal, and property clearouts — fast delivery and pickup.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container about-grid">
+      <div class="about-media">
+        <div class="about-img-wrap">
+          <img class="about-img" src="about-excavation.jpg" alt="Mother Excavation crew at work" />
+        </div>
+        <div class="xp-badge" aria-hidden="true">
+          <div class="num">25</div>
+          <div class="label">YEARS EXPERIENCE</div>
+        </div>
+      </div>
+
+      <div class="about-text">
+        <div class="eyebrow">About Us</div>
+        <h2 class="h2">Built on Hard Work and Trust</h2>
+        <p>
+          Mother Excavation Inc is a family-operated business built on dedication, precision, and honesty. 
+          We bring over two decades of hands-on experience in excavation, trucking, and site work across Virginia. 
+          Our mission is simple — deliver reliable results and treat every project like it’s our own.
+        </p>
+        <p class="lead" style="font-size:1rem;">
+          Fully licensed & insured • Professional operators • Clean, safe, and on time • Commercial & residential services
+        </p>
+        <div class="about-actions">
+          <a class="btn" href="#contact">Contact Us Today</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section" style="padding-top:56px;">
+    <div class="container" style="text-align:center;">
+      <div class="eyebrow">Get A Quote</div>
+      <h2 class="h2">Ready to start your project?</h2>
+      <p class="lead" style="margin: 10px auto 22px; max-width: 640px;">
+        Tell us about your job and the timeline. We’ll respond quickly with next steps.
+      </p>
+      <a class="btn" href="mailto:info@motherexcavation.com">Email Us</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© <span id="yr"></span> Mother Excavation Inc</div>
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

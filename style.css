@@ -1,0 +1,441 @@
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+	--bg: #0a0a0a;
+	--panel: #101010;
+	--panel-2: #141414;
+	--brand: #fa1515;
+	--text: #eaeaea;
+	/* brighter body text */
+	--muted: #bcbcbc;
+	/* for secondary text */
+	--line: #242424;
+	--radius: 14px;
+	--shadow: 0 12px 30px rgba(250, 21, 21, 0.15);
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+	background: var(--bg);
+	color: var(--text);
+	overflow-x: hidden;
+}
+
+html,
+body {
+	min-width: 600px;
+	/* or 500px if you want it a bit wider */
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+/* Layout helpers */
+.container {
+	width: min(1200px, 92%);
+	margin: 0 auto;
+}
+
+.section {
+	padding: 96px 0;
+	position: relative;
+}
+
+.eyebrow {
+	letter-spacing: .2em;
+	text-transform: uppercase;
+	font-weight: 700;
+	color: var(--muted);
+	font-size: .85rem;
+	margin-bottom: 12px;
+}
+
+.h1 {
+	font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+	line-height: 1.05;
+	color: #fff;
+}
+
+.h2 {
+	font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+	line-height: 1.1;
+	color: #fff;
+}
+
+.lead {
+	color: #d6d6d6;
+	font-size: 1.075rem;
+	line-height: 1.65;
+}
+
+/* Header */
+header {
+	width: clamp(500px, 94vw, 1200px);
+	position: fixed;
+	top: 24px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: #000;
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	z-index: 1000;
+}
+
+.nav {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+	background: #000;
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	gap: 20px;
+	padding: 16px 28px;
+}
+
+.nav {
+	min-width: 500px;
+}
+
+.brand,
+.links ul,
+.btn {
+	white-space: nowrap;
+}
+
+.brand {
+	display: inline-flex;
+	justify-self: start;
+	align-items: center;
+	gap: 10px;
+	font-weight: 800;
+	color: var(--brand);
+}
+
+.brand img {
+	height: 30px;
+}
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	gap: .6rem;
+	background: #fff;
+	color: #111;
+	padding: 14px 22px;
+	border-radius: 12px;
+	font-weight: 700;
+	border: 2px solid #fff;
+	transition: .25s ease;
+	justify-self: end;
+}
+
+.btn:hover {
+	background: var(--brand);
+	border-color: var(--brand);
+	color: #000;
+	transform: translateY(-2px);
+}
+
+.links {
+	justify-self: center;
+}
+
+.links ul {
+	list-style: none;
+	display: flex;
+	gap: 32px;
+	align-items: center;
+}
+
+.links li a {
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	height: 1.2em;
+	/* matches one line height */
+	color: #bbb;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+/* two stacked spans slide on hover */
+.links li a span {
+	display: block;
+	transition: transform .4s ease, opacity .4s ease;
+}
+
+.links li a span:nth-child(2) {
+	position: absolute;
+	left: 0;
+	top: 0;
+	transform: translateY(150%);
+	opacity: 0;
+	color: #fff;
+}
+
+.links li a:hover span:nth-child(1) {
+	transform: translateY(-150%);
+	opacity: 0;
+}
+
+.links li a:hover span:nth-child(2) {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+/* (optional) if you used an underline bar before, disable it for these links */
+.links a::after {
+	display: none;
+}
+
+/* Hero (kept simple, darker overlay + brighter text) */
+.hero {
+	min-height: 78vh;
+	display: grid;
+	place-items: center;
+	background:
+		radial-gradient(1200px 600px at 50% 0%, rgba(250, 21, 21, .08), transparent),
+		url('truck-bg.jpg') center/cover no-repeat;
+	position: relative;
+	text-align: center;
+}
+
+.hero::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(to bottom, rgba(0, 0, 0, .78), rgba(0, 0, 0, .55));
+}
+
+.hero-inner {
+	position: relative;
+	z-index: 1;
+	max-width: 820px;
+	padding: 24px;
+}
+
+.hero .lead {
+	margin-top: 12px;
+}
+
+.hero-actions {
+	margin-top: 26px;
+	display: inline-flex;
+	gap: 16px;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+/* Services — CARD GRID */
+#services {
+	background: #0b0b0b;
+}
+
+.services-head {
+	text-align: center;
+	margin-bottom: 28px;
+}
+
+.cards {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 26px;
+}
+
+.card {
+	grid-column: span 4;
+	background: linear-gradient(180deg, var(--panel), var(--panel-2));
+	border: 1px solid #1d1d1d;
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: var(--shadow);
+	transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.card:hover {
+	transform: translateY(-6px);
+	border-color: #2a2a2a;
+	box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
+}
+
+.card-media {
+	aspect-ratio: 16 / 10;
+	position: relative;
+	overflow: hidden;
+}
+
+.card-media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: contrast(1.05) saturate(1.05);
+	transform: scale(1.02);
+}
+
+.card-body {
+	padding: 22px 22px 24px;
+	display: grid;
+	gap: 6px;
+}
+
+.card-title {
+	font-size: 1.15rem;
+	font-weight: 800;
+	letter-spacing: .2px;
+	color: #fff;
+}
+
+.card-sub {
+	color: var(--muted);
+	font-size: .98rem;
+}
+
+/* About */
+#about {
+	background: radial-gradient(900px 400px at 10% 10%, rgba(250, 21, 21, .09), transparent);
+}
+
+.about-grid {
+	display: grid;
+	grid-template-columns: 1.1fr .9fr;
+	gap: 44px;
+	align-items: center;
+}
+
+.about-media {
+	position: relative;
+}
+
+.about-img-wrap {
+	border-radius: 16px;
+	overflow: hidden;
+	border: 1px solid #1f1f1f;
+	box-shadow: 0 16px 36px rgba(0, 0, 0, .4);
+}
+
+.about-img {
+	width: 100%;
+	height: 520px;
+	object-fit: cover;
+}
+
+/* Experience badge */
+.xp-badge {
+	position: absolute;
+	left: 42px;
+	bottom: -28px;
+	background: #111;
+	border: 1px solid #2a2a2a;
+	border-radius: 14px;
+	padding: 18px 24px;
+	display: grid;
+	place-items: center;
+	box-shadow: 0 10px 26px rgba(0, 0, 0, .4);
+}
+
+.xp-badge .num {
+	font-size: 2.2rem;
+	font-weight: 900;
+	color: #dcdcdc;
+	line-height: 1;
+}
+
+.xp-badge .label {
+	color: var(--muted);
+	font-weight: 700;
+	font-size: .85rem;
+	letter-spacing: .06em;
+	margin-top: 4px;
+	white-space: nowrap;
+}
+
+.about-text {
+	display: grid;
+	gap: 16px;
+}
+
+.about-text p {
+	color: #d8d8d8;
+	font-size: 1.05rem;
+	line-height: 1.7;
+}
+
+.about-actions {
+	margin-top: 8px;
+}
+
+/* Footer */
+footer {
+	border-top: 1px solid var(--line);
+	color: var(--muted);
+	padding: 36px 0;
+	text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+	.cards .card {
+		grid-column: span 6;
+	}
+
+	.about-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.xp-badge {
+		left: 24px;
+		bottom: -22px;
+	}
+
+	.about-img {
+		height: 420px;
+	}
+}
+
+@media (max-width: 720px) {
+	.nav {
+		gap: 12px;
+		padding: 14px 20px;
+	}
+
+	.links ul {
+		gap: 18px;
+	}
+}
+
+@media (max-width: 640px) {
+	header {
+		inset: 14px auto auto 50%;
+	}
+
+	.nav {
+		padding: 12px 14px;
+	}
+
+	.cards .card {
+		grid-column: span 12;
+	}
+
+	.about-img {
+		height: 320px;
+	}
+
+	.xp-badge .num {
+		font-size: 1.8rem;
+	}
+}
