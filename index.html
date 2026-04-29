@@ -4,45 +4,97 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mother Excavation Inc</title>
+  <meta name="description" content="Professional excavation, hauling, demolition, and dumpster services across Northern Virginia. Licensed, insured, and family-owned.">
+  <meta name="keywords" content="excavation, hauling, demolition, dumpsters, Northern Virginia, site work, trucking, grading, Mother Excavation">
+  <meta name="author" content="Mother Excavation Inc">
   <link rel="icon" href="images/logo.jpg" type="image/jpg" />
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="animation.css" />
   <script src="index.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Mother Excavation Inc",
+    "url": "https://motherexcavationinc.com",
+    "logo": "https://motherexcavationinc.com/images/logo.jpg",
+    "sameAs": [
+      "https://www.facebook.com/"
+    ]
+  }
+  </script>
 </head>
 <body>
 
-  <!-- HEADER -->
-<header>
-  <div class="nav">
-    <a class="brand" href="#">
-      <img src="images/logo.jpg" alt="Logo" />Mother Excavation
-    </a>
+  <header>
+    <div class="navbar">
+      <a href="#" class="logo">
+        <img src="images/logo.jpg" alt="Mother Excavation Logo" />
+        <div class="logo-text">
+          <span class="name">MOTHER</span>
+          <span class="sub">EXCAVATION INC</span>
+        </div>
+      </a>
 
-    <nav class="links">
-      <ul>
-        <!-- Services Dropdown -->
-        <li class="has-dropdown">
-          <a href="#services" class="dropdown-toggle">Services</a>
-          <ul class="dropdown-menu dropdown-list">
-            <li><a href="excavation/">Excavation</a></li>
-            <li><a href="hauling/">Hauling Materials</a></li>
-            <li><a href="demolition/">Demolition</a></li>
-            <li><a href="dumpster/">Dumpster Services</a></li>
-          </ul>
-        </li>
+      <nav class="links">
+        <ul>
+          <li class="has-dropdown">
+            <a href="#"><span>Services</span><span>Services</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="excavation/index.html">Excavation</a></li>
+              <li><a href="hauling/index.html">Hauling</a></li>
+              <li><a href="demolition/index.html">Demolition</a></li>
+              <li><a href="dumpsters/index.html">Dumpsters</a></li>
+            </ul>
+          </li>
+          <li><a href="#about"><span>About</span><span>About</span></a></li>
+          <li><a href="#contact"><span>Contact</span><span>Contact</span></a></li>
+        </ul>
+      </nav>
 
-        <!-- Other links -->
-        <li><a href="#about"><span>About</span><span>About</span></a></li>
-        <li><a href="#contact"><span>Contact</span><span>Contact</span></a></li>
-      </ul>
-    </nav>
+      <a href="#contact" class="cta">Let's Chat!</a>
 
-    <a class="btn" href="#contact">Let's Chat!</a>
+      <div class="menu-toggle" id="menu-toggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-header">
+      <img src="images/logo.jpg" class="mobile-logo" alt="Logo">
+      <h2>Mother Excavation Inc</h2>
+      <button class="close-btn" id="closeBtn">&times;</button>
+    </div>
+
+    <ul class="mobile-links">
+      <li class="mobile-dropdown">
+        <button class="dropdown-btn">
+          <span class="main-link">Services</span>
+          <span class="arrow-btn">&#9662;</span>
+        </button>
+        <ul class="dropdown-content">
+          <li><a href="excavation/index.html">Excavation</a></li>
+          <li><a href="hauling/index.html">Hauling</a></li>
+          <li><a href="demolition/index.html">Demolition</a></li>
+          <li><a href="dumpsters/index.html">Dumpsters</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#about" class="dropdown-btn"><span>About</span></a>
+      </li>
+      <li>
+        <a href="#contact" class="dropdown-btn"><span>Contact</span></a>
+      </li>
+    </ul>
   </div>
-</header>
 
-
-
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-inner container">
       <div class="eyebrow">Mother Excavation Inc</div>
@@ -53,12 +105,11 @@
       </p>
       <div class="hero-actions">
         <a class="btn" href="#contact">Get a Free Quote</a>
-        <a class="btn" style="background:transparent;color:#fff;border-color:var(--brand)" href="#services">View Services</a>
+        <a class="btn" style="background:transparent;color:#ff0000;border-color:var(--brand)" href="#services">View Services</a>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES -->
   <section id="services" class="section">
     <div class="container">
       <div class="services-head">
@@ -67,67 +118,46 @@
       </div>
 
       <div class="cards">
-        <!-- Excavation -->
-        <a href="excavation/" class="card">
-          <div class="card-media">
-            <img src="images/excavation-main.png" alt="Excavation work site" />
-          </div>
+        <a href="../excavation/" class="card">
+          <div class="card-media"><img src="images/excavation-main.png" alt="Excavation" /></div>
           <div class="card-body">
             <h3 class="card-title">Excavation</h3>
-            <p class="card-sub">
-              From precise grading to large-scale digging — our crews deliver clean, accurate work with modern equipment.
-            </p>
+            <p class="card-sub">From grading to full dig-outs, we deliver clean, precise site work built on experience.</p>
           </div>
         </a>
 
-        <!-- Hauling -->
-        <a href="hauling/" class="card">
-          <div class="card-media">
-            <img src="images/hauling-main.png" alt="Hauling materials truck"/>
-          </div>
+        <a href="../hauling/" class="card">
+          <div class="card-media"><img src="images/hauling-main.png" alt="Hauling materials"/></div>
           <div class="card-body">
-            <h3 class="card-title">Hauling Materials</h3>
-            <p class="card-sub">
-              Need materials moved? We haul dirt, gravel, stone, and debris safely and efficiently across Northern Virginia.
-            </p>
+            <h3 class="card-title">Hauling</h3>
+            <p class="card-sub">We haul dirt, gravel, stone, and debris across Northern Virginia — safely and efficiently.</p>
           </div>
         </a>
 
-        <!-- Demolition -->
-        <a href="demolition/" class="card">
-          <div class="card-media">
-            <img src="images/demolition-main.png" alt="Demolition project in progress" />
-          </div>
+        <a href="../demolition/" class="card">
+          <div class="card-media"><img src="images/demolition-main.png" alt="Demolition"/></div>
           <div class="card-body">
             <h3 class="card-title">Demolition</h3>
-            <p class="card-sub">
-              We handle full or partial demolition projects — residential, commercial, or industrial — with safety and precision.
-            </p>
+            <p class="card-sub">Residential or commercial — we handle demolitions with safety, speed, and precision.</p>
           </div>
         </a>
 
-        <!-- Dumpster Services -->
-        <a href="dumpster/" class="card">
-          <div class="card-media">
-            <img src="images/dumpster-main.png" alt="Dumpster rental service" />
-          </div>
+        <a href="../dumpster/" class="card">
+          <div class="card-media"><img src="images/dumpster-main.png" alt="Dumpster rentals"/></div>
           <div class="card-body">
-            <h3 class="card-title">Dumpster Services</h3>
-            <p class="card-sub">
-              On-demand dumpster rentals for construction cleanup, debris removal, and property clearouts — fast delivery and pickup.
-            </p>
+            <h3 class="card-title">Dumpsters</h3>
+            <p class="card-sub">Fast dumpster delivery and pickup for construction, cleanup, and property clearouts.</p>
           </div>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT -->
   <section id="about" class="section">
     <div class="container about-grid">
       <div class="about-media">
         <div class="about-img-wrap">
-          <img class="about-img" src="images/hero-main.png" alt="Mother Excavation crew at work" />
+          <img class="about-img" src="images/hero-main.png" alt="Mother Excavation team" />
         </div>
         <div class="xp-badge" aria-hidden="true">
           <div class="num">20</div>
@@ -141,61 +171,53 @@
         <p>
           Mother Excavation Inc is a family-operated business built on dedication, precision, and honesty. 
           We bring years of hands-on experience in excavation, trucking, and site work across Virginia. 
-          Our mission is simple — deliver reliable results and treat every project like it’s our own.
+          Our mission is simple deliver reliable results and treat every project like it’s our own.
         </p>
         <p class="lead" style="font-size:1rem;">
           Fully licensed & insured • Professional operators • Clean, safe, and on time • Commercial & residential services
         </p>
         <div class="about-actions">
-          <a class="btn" href="#contact">Contact Us Today</a>
+          <a class="btn" href="../#contact">Contact Us Today</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact" class="section" style="padding-top:56px;">
     <div class="container" style="text-align:center;">
       <div class="eyebrow">Get A Quote</div>
       <h2 class="h2">Ready to start your project?</h2>
       <p class="lead" style="margin: 10px auto 22px; max-width: 640px;">
-        Tell us about your job and timeline — we’ll respond quickly with next steps.
+        Tell us about your job and timeline we’ll respond quickly with next steps.
       </p>
       <a class="btn" href="mailto:motherexcavationinc@gmail.com">Email Us</a>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer id="footer">
     <div class="container footer-grid">
       <div class="footer-about">
         <img src="images/logo.jpg" alt="Mother Excavation Inc." class="footer-logo">
-        <p>
-          Professional excavation, hauling, demolition, and dumpster services 
-          across Northern Virginia, Maryland, and Washington D.C. that you can trust.
-        </p>
-        <p>
-          With over 20 years of experience, we take pride in listening to your needs 
-          and delivering reliable, honest work from start to finish.
-        </p>
+        <p>Excavation, hauling, demolition, and dumpster services across Northern Virginia, Maryland, and D.C.</p>
+        <p>Family-owned, fully insured, and focused on clean, honest work that gets the job done right.</p>
       </div>
 
       <div class="footer-nav">
         <h4>Navigation</h4>
         <ul>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#services">Our Services</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="../#about">About Us</a></li>
+          <li><a href="../#services">Our Services</a></li>
+          <li><a href="../#contact">Contact</a></li>
         </ul>
       </div>
 
       <div class="footer-services">
         <h4>Our Services</h4>
         <ul>
-          <li><a href="excavation/">Excavation</a></li>
-          <li><a href="hauling/">Hauling Materials</a></li>
-          <li><a href="demolition/">Demolition</a></li>
-          <li><a href="dumpster/">Dumpster Services</a></li>
+          <li><a href="../excavation/">Excavation</a></li>
+          <li><a href="../hauling/">Hauling</a></li>
+          <li><a href="../demolition/">Demolition</a></li>
+          <li><a href="../dumpster/">Dumpsters</a></li>
         </ul>
       </div>
 
@@ -204,17 +226,17 @@
         <div class="social-links">
           <a href="#"><i class="fab fa-facebook"></i></a>
         </div>
-        <p class="footer-phone">(English) Call us at: (571) 343-9675</p>
-        <p class="footer-phone">(Spanish) Call us at: (571) 778-2868</p>
-        <p class="footer">Email: motherexcavationinc@gmail.com</p>
+        <p>(English) Call: (571) 343-9675</p>
+        <p>(Spanish) Call: (571) 778-2868</p>
+        <p>Email: motherexcavationinc@gmail.com</p>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p>© 2025 Mother Excavation Inc. All rights reserved.</p>
+      <p>© <span id="yr"></span> Mother Excavation Inc. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
 </body>
 </html>
-
-
