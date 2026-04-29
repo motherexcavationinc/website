@@ -17,16 +17,16 @@ body {
 }
 
 :root {
-  --bg:       #080808;
-  --panel:    #101010;
-  --panel-2:  #141414;
-  --brand:    #fa1515;
-  --text:     #eaeaea;
-  --muted:    #b8b8b8;
-  --line:     #222222;
-  --radius:   14px;
-  --shadow:   0 12px 32px rgba(250, 21, 21, 0.18);
-  --trans:    0.28s ease;
+  --bg: #080808;
+  --panel: #101010;
+  --panel-2: #141414;
+  --brand: #fa1515;
+  --text: #eaeaea;
+  --muted: #b8b8b8;
+  --line: #222222;
+  --radius: 14px;
+  --shadow: 0 12px 32px rgba(250, 21, 21, 0.18);
+  --trans: 0.28s ease;
 }
 
 a   { color: inherit; text-decoration: none; }
@@ -789,7 +789,6 @@ header.hide-nav {
   }
 }
 
-/* Small mobile */
 @media (max-width: 640px) {
   .section { padding: 72px 0; }
 
