@@ -4,12 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node src/build.mjs",
-    "check": "node src/check.mjs",
-    "dev": "python -m http.server 5173 --bind 127.0.0.1 --directory dist",
-    "test": "node --test src/*.test.mjs",
-    "format": "prettier --write src public/*.css public/*.js content README.md package.json .github/workflows",
-    "format:check": "prettier --check src public/*.css public/*.js content README.md package.json .github/workflows"
+    "build": "node source/src/build.mjs",
+    "check": "node source/src/check.mjs",
+    "dev": "python -m http.server 5173 --bind 127.0.0.1 --directory final",
+    "test": "node --test source/src/*.test.mjs",
+    "format": "prettier --write source README.md package.json .github/workflows",
+    "format:check": "prettier --check source README.md package.json .github/workflows"
   },
   "devDependencies": {
     "prettier": "3.9.6"

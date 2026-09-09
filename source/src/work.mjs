@@ -6,8 +6,8 @@ export function sortProjects(projects) {
 }
 
 export async function loadWork() {
-  const projects = JSON.parse(await readFile('content/work.json', 'utf8'));
-  if (!Array.isArray(projects)) throw new Error('content/work.json must contain a list.');
+  const projects = JSON.parse(await readFile('source/content/work.json', 'utf8'));
+  if (!Array.isArray(projects)) throw new Error('source/content/work.json must contain a list.');
   for (const [index, project] of projects.entries()) {
     try {
       if (!project || typeof project.title !== 'string' || !project.title.trim())
@@ -33,7 +33,7 @@ export async function loadWork() {
         renderMedia(media, project.title);
       }
     } catch (error) {
-      throw new Error(`content/work.json project ${index + 1}: ${error.message}`);
+      throw new Error(`source/content/work.json project ${index + 1}: ${error.message}`);
     }
   }
   return sortProjects(projects);
