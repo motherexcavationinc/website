@@ -60,12 +60,8 @@ test('sorts newest first with unknown dates last, preserving unknown order', () 
   );
 });
 test('shows all projects and explicit unknown dates', () => {
-  const html = renderWork([
-    { title: 'First', description: '', date: '', placeholder: true, media: [] },
-    { title: 'Second', description: '', date: '2026-09-01', placeholder: true, media: [] },
-  ]);
-  assert.match(html, /First/);
-  assert.match(html, /Second/);
-  assert.match(html, /Date unknown/);
-  assert.match(html, /September 1, 2026/);
+  const html = renderWork();
+  assert.match(html, /data-work-section/);
+  assert.match(html, /data-work-list/);
+  assert.match(html, /Loading project work/);
 });

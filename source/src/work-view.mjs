@@ -82,11 +82,9 @@ export function renderMedia(media, title) {
   throw new Error(`Unsupported media type: ${media.type}`);
 }
 
-export function renderWork(projects) {
-  const visible = projects;
-  if (!visible.length) return '';
+export function renderWork() {
   return /* HTML */ `
-    <section class="section work" id="work">
+    <section class="section work" id="work" data-work-section>
       <div class="container">
         <div class="section-heading">
           <div>
@@ -95,24 +93,8 @@ export function renderWork(projects) {
           </div>
           <p>Project photos and videos from the field.</p>
         </div>
-        <div class="project-grid">
-          ${visible
-            .map(
-              (project) => /* HTML */ `
-                <article class="project-card">
-                  <div class="recent-media">
-                    ${project.media.length ? project.media.map((media) => renderMedia(media, project.title)).join('\n') : renderMedia(null, project.title)}
-                  </div>
-                  <div class="recent-copy">
-                    ${project.placeholder ? '<p class="eyebrow">SAMPLE PROJECT</p>' : ''}
-                    <h3>${escapeHtml(project.title)}</h3>
-                    ${project.date ? `<time datetime="${project.date}">${new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(project.date))}</time>` : '<span class="project-date">Date unknown</span>'}
-                    <p>${escapeHtml(project.description)}</p>
-                  </div>
-                </article>
-              `,
-            )
-            .join('\n')}
+        <div class="project-grid" data-work-list>
+          <p class="work-loading">Loading project work...</p>
         </div>
       </div>
     </section>

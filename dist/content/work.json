@@ -1,0 +1,61 @@
+[
+  {
+    "title": "Site preparation",
+    "description": "Sample project. Photos and details coming soon.",
+    "placeholder": true,
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/excavation-main.png",
+        "alt": "Site preparation sample photo"
+      }
+    ],
+    "date": ""
+  },
+  {
+    "title": "Material hauling",
+    "description": "Sample project. Photos and details coming soon.",
+    "placeholder": true,
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/hero-main.png",
+        "alt": "Material hauling sample photo"
+      }
+    ],
+    "date": ""
+  },
+  {
+    "title": "Jobsite cleanup",
+    "description": "Sample project. Photos and details coming soon.",
+    "placeholder": true,
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/about-main.png",
+        "alt": "Jobsite cleanup sample photo"
+      }
+    ],
+    "date": ""
+  },
+  {
+    "title": "Dumpster service",
+    "description": "Sample project. Photos and details coming soon.",
+    "placeholder": true,
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/dumpster-main.png",
+        "alt": "Dumpster service sample photo"
+      }
+    ],
+    "date": ""
+  },
+  {
+    "title": "On site, in action",
+    "description": "Project footage coming soon.",
+    "placeholder": true,
+    "media": [],
+    "date": ""
+  }
+]

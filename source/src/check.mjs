@@ -3,7 +3,7 @@ import { resolve, join } from 'node:path';
 import assert from 'node:assert/strict';
 import { services } from './services.mjs';
 
-const root = resolve('final');
+const root = resolve('dist');
 const pages = ['index.html', ...services.map((service) => `${service.slug}/index.html`)];
 let references = 0;
 for (const page of pages) {

@@ -18,7 +18,7 @@ Open http://127.0.0.1:5173. Run `npm test` and `npm run check` to validate chang
 2. Open `source/content/work.json`. Copy a project object, keep commas between objects, and edit its title, description, date, and media.
 3. Set `placeholder` to `false` for real work. Run the build and checks, then commit your changes.
 
-Every project appears in the single Our Work section on the homepage and ALL four service pages. Projects sort automatically by date, newest first. Set `date` to `""`, `null`, or omit it when unknown; these show “Date unknown” after dated projects, in file order. Dates must otherwise use `YYYY-MM-DD`.
+Every project appears in the single Our Work section on the homepage and ALL four service pages. The browser loads `content/work.json` directly, so the gallery is live-rendered from JSON instead of being baked into each HTML page. Projects sort automatically by date, newest first. Set `date` to `""`, `null`, or omit it when unknown; these show “Date unknown” after dated projects, in file order. Dates must otherwise use `YYYY-MM-DD`.
 
 Example project:
 
@@ -62,7 +62,7 @@ Use a playable media URL, not a cloud-storage preview page. The host should serv
 
 ## Upload to GitHub and publish
 
-1. For the simplest upload, put the contents of `final/` in your GitHub repository. That folder is the finished static website.
+1. For the simplest upload, put the contents of `dist/` in your GitHub repository. That folder is the finished static website.
 2. In the repository, open **Settings → Pages → Build and deployment → Source → Deploy from a branch** and choose the branch and folder where you uploaded those files.
 
 If you want GitHub to rebuild the site automatically whenever the source changes, upload the whole project instead: `.github/workflows/pages.yml`, `source/`, `package.json`, and `package-lock.json`.
@@ -71,7 +71,7 @@ Then use the GitHub Actions setup:
 
 1. In the repository, open **Settings → Pages → Build and deployment → Source → GitHub Actions**.
 2. Push to `main` or `master`, or manually run **Publish website** from Actions.
-3. The workflow installs locked dependencies, tests, builds, checks links, and publishes `final` to GitHub Pages. GitHub shows the resulting website URL in Pages settings.
+3. The workflow installs locked dependencies, tests, builds, checks links, and publishes `dist` to GitHub Pages. GitHub shows the resulting website URL in Pages settings.
 
 Relative links work with both `username.github.io/repository/` and a custom-domain root. No domain, repository, or GitHub deployment has been created for you. If you use another default branch, update the workflow branch list.
 
@@ -83,7 +83,7 @@ Relative links work with both `username.github.io/repository/` and a custom-doma
 - `source/src/services.mjs`: service descriptions.
 - `source/src/work.mjs`: content validation and chronological sorting.
 - `source/src/work-view.mjs`: project gallery and video rendering.
-- `final/`: formatted generated website. Upload this folder when you want the finished site.
+- `dist/`: formatted generated website. Upload this folder when you want the finished site.
 
 V2 supplied the business details and photos. Its conflicting experience counts were omitted. The sample projects do not claim real completion dates. Contact links open phone/email apps; no form backend is required.
 

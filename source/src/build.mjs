@@ -2,8 +2,9 @@ import { cp, mkdir, rm, writeFile } from 'node:fs/promises';
 import { services } from './services.mjs';
 import { loadWork } from './work.mjs';
 import { format } from 'prettier';
-const projects = await loadWork();
 import { renderWork } from './work-view.mjs';
+
+await loadWork();
 
 const arrow = '<span aria-hidden="true">↗</span>';
 const email = 'motherexcavationinc@gmail.com';
@@ -183,13 +184,14 @@ const home = /* HTML */ ` <section class="hero">
       </div>
     </div>
   </section>
-  ${renderWork(projects)} ${contact}`;
+  ${renderWork()} ${contact}`;
 
-await rm('final', { force: true, recursive: true });
-await mkdir('final', { recursive: true });
-await cp('source/public', 'final', { recursive: true });
+await rm('dist', { force: true, recursive: true });
+await mkdir('dist', { recursive: true });
+await cp('source/public', 'dist', { recursive: true });
+await cp('source/content', 'dist/content', { recursive: true });
 await savePage(
-  'final/index.html',
+  'dist/index.html',
   layout(
     'Excavation & Site Services',
     'Family-owned excavation, hauling, demolition, and dumpster services across Northern Virginia, Maryland, and D.C.',
@@ -223,10 +225,10 @@ for (const service of services) {
         <p>${service.process}</p>
       </div>
     </section>
-    ${renderWork(projects)}${contact}`;
-  await mkdir(`final/${service.slug}`, { recursive: true });
+    ${renderWork()}${contact}`;
+  await mkdir(`dist/${service.slug}`, { recursive: true });
   await savePage(
-    `final/${service.slug}/index.html`,
+    `dist/${service.slug}/index.html`,
     layout(service.name, service.description, content),
   );
 }
@@ -234,7 +236,7 @@ console.log('Built homepage and four service pages.');
 
 async function savePage(path, html) {
   // Relative URLs work on both custom domains and GitHub repository subpaths.
-  const prefix = path === 'final/index.html' ? './' : '../';
+  const prefix = path === 'dist/index.html' ? './' : '../';
   const portable = html.replace(/(href|src|poster)="\/(?!\/)/g, `$1="${prefix}`);
   await writeFile(path, await format(portable, { parser: 'html', printWidth: 100 }));
 }
