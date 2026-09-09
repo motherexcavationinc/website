@@ -9,25 +9,63 @@ test('normalizes supported YouTube share formats', () => {
     'https://youtube.com/shorts/M7lc1UVf-VE',
     'https://youtube.com/live/M7lc1UVf-VE',
     'https://www.youtube-nocookie.com/embed/M7lc1UVf-VE',
-  ]) assert.equal(youtubeId(url), 'M7lc1UVf-VE');
+  ])
+    assert.equal(youtubeId(url), 'M7lc1UVf-VE');
 });
 
 test('rejects malformed URLs and unsafe media sources', () => {
-  for (const url of ['https://youtube.com.evil.test/watch?v=M7lc1UVf-VE', 'https://youtube.com/watch?v=bad', 'javascript:alert(1)', 'http://youtu.be/M7lc1UVf-VE']) {
+  for (const url of [
+    'https://youtube.com.evil.test/watch?v=M7lc1UVf-VE',
+    'https://youtube.com/watch?v=bad',
+    'javascript:alert(1)',
+    'http://youtu.be/M7lc1UVf-VE',
+  ]) {
     assert.throws(() => youtubeId(url));
   }
-  for (const url of ['//evil.test/video.mp4', 'javascript:alert(1)', 'https://user:password@example.com/video.mp4']) {
+  for (const url of [
+    '//evil.test/video.mp4',
+    'javascript:alert(1)',
+    'https://user:password@example.com/video.mp4',
+  ]) {
     assert.throws(() => renderMedia({ type: 'video', url }, 'Video'));
   }
 });
 
 test('renders embeds and hosted files with accessible controls and fallbacks', () => {
-  const youtube = renderMedia({ type: 'youtube', url: 'https://youtu.be/M7lc1UVf-VE' }, 'Digging & grading');
+  const youtube = renderMedia(
+    { type: 'youtube', url: 'https://youtu.be/M7lc1UVf-VE' },
+    'Digging & grading',
+  );
   assert.match(youtube, /youtube-nocookie.com\/embed\/M7lc1UVf-VE/);
   assert.match(youtube, /title="Digging &amp; grading"/);
   assert.match(youtube, /Watch on YouTube/);
   const video = renderMedia({ type: 'video', url: 'https://media.example.com/job.mp4' }, 'Job');
-  assert.match(video, /controls playsinline preload="none"/);
+  assert.match(video, /controls\s+playsinline\s+preload="none"/);
   assert.match(video, /Open video/);
   assert.doesNotMatch(renderMedia(null, 'Coming soon'), /<iframe|<video|<button/);
+});
+
+import { sortProjects } from './work.mjs';
+import { renderWork } from './work-view.mjs';
+test('sorts newest first with unknown dates last, preserving unknown order', () => {
+  const projects = [
+    { title: 'Unknown', date: '' },
+    { title: 'Old', date: '2024-01-01' },
+    { title: 'New', date: '2026-09-01' },
+    { title: 'Also unknown', date: null },
+  ];
+  assert.deepEqual(
+    sortProjects(projects).map((p) => p.title),
+    ['New', 'Old', 'Unknown', 'Also unknown'],
+  );
+});
+test('shows all projects and explicit unknown dates', () => {
+  const html = renderWork([
+    { title: 'First', description: '', date: '', placeholder: true, media: [] },
+    { title: 'Second', description: '', date: '2026-09-01', placeholder: true, media: [] },
+  ]);
+  assert.match(html, /First/);
+  assert.match(html, /Second/);
+  assert.match(html, /Date unknown/);
+  assert.match(html, /September 1, 2026/);
 });

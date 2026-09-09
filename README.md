@@ -1,29 +1,84 @@
-# Mother Excavation v3
+# Mother Excavation website
 
-A dependency-free static website based on v2's business information, original photos, and exact brand palette. The homepage and four service pages share one layout and content module.
+## Start locally
 
-## Development
+Install Node.js 22 or newer and Python 3, then run:
 
-Requires Node.js 22+ and Python 3 for the local preview.
+```sh
+npm ci
+npm run build
+npm run dev
+```
 
-- `npm run build` generates the five HTML pages.
-- `npm run check` validates local links, anchors, assets, and page metadata.
-- `npm run dev` serves `dist` at http://127.0.0.1:5173.
+Open http://127.0.0.1:5173. Run `npm test` and `npm run check` to validate changes. Run `npm run format` to format source files.
 
-Edit page templates in `src/build.mjs`, service content in `src/services.mjs`, and shared presentation in `dist/styles.css` and `dist/main.js`. CSS, JavaScript, and photos in `dist` are authored assets; do not delete the directory before building.
+## Add a project (photos or videos)
 
-Phone and email links open the visitor's phone or email application. There is no form backend or simulated submission. Navigation remains accessible without JavaScript.
+1. Put new photos in `public/images/work/` (create the folder if needed). Use lowercase filenames with hyphens.
+2. Open `content/work.json`. Copy a project object, keep commas between objects, and edit its title, description, date, and media.
+3. Set `placeholder` to `false` for real work. Run the build and checks, then commit your changes.
 
-V2's experience claims conflict (20 years on the homepage and over 6 on service pages), so v3 omits a numeric claim. Service areas, licensing claims, and contact details are carried over from v2.
+Every project appears in the single Our Work section on the homepage and ALL four service pages. Projects sort automatically by date, newest first. Set `date` to `""`, `null`, or omit it when unknown; these show “Date unknown” after dated projects, in file order. Dates must otherwise use `YYYY-MM-DD`.
 
-## Project photos and recent work
+Example project:
 
-Edit `src/work.mjs` to replace the clearly labeled sample projects and recent-work placeholders. Set `placeholder: false` only after adding real project details. Photo URLs can be local paths under `dist/images/` or externally hosted HTTPS URLs. Supply descriptive alt text. Order recent-work entries newest first.
+```json
+{
+  "title": "Residential site preparation",
+  "description": "Grading and material hauling for a residential site.",
+  "date": "2026-09-09",
+  "placeholder": false,
+  "media": [
+    {
+      "type": "image",
+      "url": "/images/work/site-preparation.jpg",
+      "alt": "Excavator grading the residential site"
+    },
+    {
+      "type": "youtube",
+      "url": "https://youtu.be/YOUR_VIDEO_ID"
+    }
+  ]
+}
+```
 
-For YouTube videos, use `{ type: 'youtube', url: 'https://youtu.be/VIDEO_ID' }` as the entry's `media`. Watch, share, Shorts, live, and embed links are supported. Upload the video to YouTube as public or unlisted and enable embedding; private videos will not play for ordinary visitors. Unlisted links can be shared by anyone who has them. The website uses YouTube's privacy-enhanced embed with an external viewing fallback.
+Replace the sample video URL with your real link, or remove that media item. Add multiple images or videos to the same media list. HTTPS image URLs work too.
 
-For videos hosted elsewhere, use `{ type: 'video', url: 'https://your-media-host.com/project.mp4', poster: '/images/project.jpg' }`. Use a direct playable HTTPS URL, not a cloud-storage preview page. The host must serve the correct video content type and should support byte-range requests. MP4 with H.264 video and AAC audio is a broadly compatible choice. No video binary is stored in this repository; the browser streams from the chosen host. No media-host account or paid service is provisioned by this site.
+### Videos stay outside GitHub
 
-The current version intentionally has no live project video until a real URL is supplied. Run `node --test src/work-view.test.mjs` to validate media URL handling, then `npm run build` and `npm run check` after editing content.
+Upload footage to YouTube, enable embedding, and use its public or unlisted link. Unlisted links can be watched and shared by anyone who has them. Private videos will not work for ordinary visitors. Watch, share, Shorts, live, and embed links are supported.
 
-References: [YouTube embedding](https://support.google.com/youtube/answer/171780) and [video visibility](https://support.google.com/youtube/answer/157177).
+Alternatively use a direct HTTPS video link from your media host:
+
+```json
+{
+  "type": "video",
+  "url": "https://your-media-host.com/project.mp4",
+  "poster": "/images/work/project-poster.jpg"
+}
+```
+
+Use a playable media URL, not a cloud-storage preview page. The host should serve the correct content type and support byte ranges. An H.264/AAC MP4 is a practical choice. The site streams from that host; no video binary belongs in this repository. Hosting accounts are not created by this code.
+
+## Upload to GitHub and publish
+
+1. Create a GitHub repository and upload this project's source, including `.github/workflows/pages.yml`, `public`, `content`, `src`, `package.json`, and `package-lock.json`. The supplied ZIP excludes local Git history and Sites-specific settings.
+2. In the repository, open **Settings → Pages → Build and deployment → Source → GitHub Actions**.
+3. Push to `main` or `master`, or manually run **Publish website** from Actions.
+4. The workflow installs locked dependencies, tests, builds, checks links, and publishes `dist` to GitHub Pages. GitHub shows the resulting website URL in Pages settings.
+
+Relative links work with both `username.github.io/repository/` and a custom-domain root. No domain, repository, or GitHub deployment has been created for you. If you use another default branch, update the workflow branch list.
+
+## Source structure
+
+- `content/work.json`: the only file needed to add project records.
+- `public/`: authored photos, CSS, and browser JavaScript.
+- `src/build.mjs`: shared layout, homepage, and service-page templates.
+- `src/services.mjs`: service descriptions.
+- `src/work.mjs`: content validation and chronological sorting.
+- `src/work-view.mjs`: project gallery and video rendering.
+- `dist/`: formatted generated website. Edit the source, not these copies.
+
+V2 supplied the business details and photos. Its conflicting experience counts were omitted. The sample projects do not claim real completion dates. Contact links open phone/email apps; no form backend is required.
+
+References: [GitHub Pages workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages), [YouTube embedding](https://support.google.com/youtube/answer/171780).
