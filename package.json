@@ -1,0 +1,11 @@
+{
+  "name": "mother-excavation-v3",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node src/build.mjs",
+    "check": "node src/check.mjs",
+    "dev": "python -m http.server 5173 --bind 127.0.0.1 --directory dist"
+  }
+}
