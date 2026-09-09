@@ -43,8 +43,8 @@ function layout(title, description, content) {
               Menu <span aria-hidden="true">+</span>
             </button>
             <nav id="navigation" aria-label="Main navigation">
-              <a href="/#services">Our services</a><a href="/#work">Our work</a
-              ><a href="/#about">Our company</a><a href="/#contact">Contact</a
+              <a href="/#services">Our services</a><a href="/#about">Our company</a
+              ><a href="/#contact">Contact</a
               ><a class="button compact" href="/#contact">Get a free quote ${arrow}</a>
             </nav>
           </div>
@@ -184,7 +184,7 @@ const home = /* HTML */ ` <section class="hero">
       </div>
     </div>
   </section>
-  ${renderWork()} ${contact}`;
+  ${contact}`;
 
 await rm('dist', { force: true, recursive: true });
 await mkdir('dist', { recursive: true });
