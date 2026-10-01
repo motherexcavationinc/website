@@ -480,24 +480,29 @@ footer {
   color: var(--brand);
   margin-right: 14px;
 }
-.dumpster-quote {
+.service-quote {
   background: var(--panel);
   border-top: 3px solid var(--brand);
 }
-.dumpster-quote-grid {
+.service-quote-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   gap: 90px;
   align-items: start;
 }
-.dumpster-quote-copy > p:not(.eyebrow) {
+.service-quote-copy > p:not(.eyebrow) {
   max-width: 480px;
+}
+.quote-call-list {
+  margin-top: 36px;
 }
 .call-link {
   display: block;
-  margin-top: 36px;
   padding-block: 22px;
-  border-block: 1px solid #333;
+  border-top: 1px solid #333;
+}
+.call-link:last-child {
+  border-bottom: 1px solid #333;
 }
 .call-link span {
   display: block;
@@ -664,7 +669,7 @@ footer {
   .about-grid,
   .contact-grid,
   .detail-grid,
-  .dumpster-quote-grid {
+  .service-quote-grid {
     grid-template-columns: 1fr;
   }
   .about-photo {
