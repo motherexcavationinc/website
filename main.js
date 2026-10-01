@@ -1,6 +1,7 @@
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('#navigation');
 const workLists = document.querySelectorAll('[data-work-list]');
+const dumpsterQuoteForm = document.querySelector('[data-dumpster-quote-form]');
 const externalArrow =
   '<svg class="arrow-icon" width="16" height="16" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="186.1,0.1 93.1,93.2 349,93.2 0,442.2 69.8,512 418.8,163 418.8,418.9 511.9,325.9 512,0" /></svg>';
 
@@ -181,3 +182,23 @@ const loadWork = async () => {
 };
 
 loadWork();
+
+if (dumpsterQuoteForm instanceof HTMLFormElement) {
+  dumpsterQuoteForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!dumpsterQuoteForm.reportValidity()) return;
+
+    const data = new FormData(dumpsterQuoteForm);
+    const body = [
+      `Name: ${data.get('name')}`,
+      `Phone: ${data.get('phone')}`,
+      `ZIP code: ${data.get('zip')}`,
+      `When needed: ${data.get('timing')}`,
+      '',
+      'Material or debris:',
+      String(data.get('material') || ''),
+    ].join('\n');
+    const subject = `Dumpster quote request - ${data.get('zip')}`;
+    window.location.href = `mailto:motherexcavationinc@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+}
