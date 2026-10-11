@@ -2,6 +2,8 @@ const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('#navigation');
 const workLists = document.querySelectorAll('[data-work-list]');
 const serviceQuoteForms = document.querySelectorAll('[data-service-quote-form]');
+const scriptSource = document.querySelector('script[src*="main.js"]')?.src;
+const siteRoot = scriptSource ? new URL('.', scriptSource) : new URL('/', window.location.origin);
 const externalArrow =
   '<svg class="arrow-icon" width="16" height="16" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="186.1,0.1 93.1,93.2 349,93.2 0,442.2 69.8,512 418.8,163 418.8,418.9 511.9,325.9 512,0" /></svg>';
 
@@ -42,7 +44,9 @@ const escapeHtml = (value) =>
 
 const mediaUrl = (value) => {
   if (typeof value !== 'string') throw new Error('Media URL must be a string.');
-  if (/^\/(?!\/)/.test(value)) return escapeHtml(value);
+  if (/^\/(?!\/)/.test(value)) {
+    return escapeHtml(new URL(value.slice(1), siteRoot).href);
+  }
   const url = new URL(value);
   if (url.protocol !== 'https:' || url.username || url.password) {
     throw new Error('External media must use an HTTPS URL without credentials.');
@@ -75,7 +79,7 @@ const youtubeId = (value) => {
 };
 
 const formatDate = (value) => {
-  if (!value) return '<span class="project-date">Date unknown</span>';
+  if (!value) return '';
   return `<time datetime="${escapeHtml(value)}">${new Intl.DateTimeFormat('en-US', {
     month: 'long',
     day: 'numeric',
@@ -87,22 +91,23 @@ const formatDate = (value) => {
 const sortProjects = (projects) =>
   [...projects].sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
 
-const renderMedia = (media, title) => {
+const renderMedia = (media, title, index) => {
+  const slideStart = `<div class="media-slide${index === 0 ? ' is-active' : ''}" data-media-slide aria-hidden="${index !== 0}">`;
   if (!media) {
-    return '<div class="media-slide"><div class="video-placeholder"><span class="film-mark" aria-hidden="true">▶</span><span>PROJECT VIDEO COMING SOON</span></div></div>';
+    return `${slideStart}<div class="video-placeholder"><span class="film-mark" aria-hidden="true">▶</span><span>PROJECT VIDEO COMING SOON</span></div></div>`;
   }
 
   if (media.type === 'youtube') {
     const id = youtubeId(media.url);
-    return `<div class="media-slide"><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/${id}" title="${escapeHtml(title)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><a class="media-fallback" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener noreferrer">Watch on YouTube ${externalArrow}</a></div>`;
+    return `${slideStart}<div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/${id}" title="${escapeHtml(title)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><a class="media-fallback" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener noreferrer">Watch on YouTube ${externalArrow}</a></div>`;
   }
 
   if (media.type === 'video') {
-    return `<div class="media-slide"><video controls playsinline preload="none" aria-label="${escapeHtml(title)}" ${media.poster ? `poster="${mediaUrl(media.poster)}"` : ''} src="${mediaUrl(media.url)}"></video><a class="media-fallback" href="${mediaUrl(media.url)}" target="_blank" rel="noopener noreferrer">Open video ${externalArrow}</a></div>`;
+    return `${slideStart}<video controls playsinline preload="none" aria-label="${escapeHtml(title)}" ${media.poster ? `poster="${mediaUrl(media.poster)}"` : ''} src="${mediaUrl(media.url)}"></video><a class="media-fallback" href="${mediaUrl(media.url)}" target="_blank" rel="noopener noreferrer">Open video ${externalArrow}</a></div>`;
   }
 
   if (media.type === 'image') {
-    return `<div class="media-slide"><img src="${mediaUrl(media.url)}" alt="${escapeHtml(media.alt ?? title)}" loading="lazy" /></div>`;
+    return `${slideStart}<img src="${mediaUrl(media.url)}" alt="${escapeHtml(media.alt ?? title)}" loading="lazy" /></div>`;
   }
 
   throw new Error(`Unsupported media type: ${media.type}`);
@@ -111,19 +116,21 @@ const renderMedia = (media, title) => {
 const renderProject = (project) => {
   const media = Array.isArray(project.media) && project.media.length ? project.media : [null];
   return `<article class="project-card">
-    <div class="media-carousel" data-media-carousel>
-      <div class="media-track" tabindex="0" aria-label="${escapeHtml(project.title)} media">
-        ${media.map((item) => renderMedia(item, project.title)).join('')}
+    <div class="media-carousel" data-media-carousel data-active-index="0">
+      <div class="media-stage">
+        <div class="media-track" tabindex="0" aria-label="${escapeHtml(project.title)} media">
+          ${media.map((item, index) => renderMedia(item, project.title, index)).join('')}
+        </div>
+        ${
+          media.length > 1
+            ? `<div class="media-controls" aria-label="Project media controls">
+                <button type="button" data-media-direction="-1" aria-label="Previous media">←</button>
+                <span data-media-status>1 / ${media.length}</span>
+                <button type="button" data-media-direction="1" aria-label="Next media">→</button>
+              </div>`
+            : ''
+        }
       </div>
-      ${
-        media.length > 1
-          ? `<div class="media-controls" aria-label="Project media controls">
-              <button type="button" data-scroll-media="-1" aria-label="Previous media">←</button>
-              <span>${media.length} items</span>
-              <button type="button" data-scroll-media="1" aria-label="Next media">→</button>
-            </div>`
-          : ''
-      }
     </div>
     <div class="recent-copy">
       ${project.placeholder ? '<p class="eyebrow">SAMPLE PROJECT</p>' : ''}
@@ -142,13 +149,32 @@ const renderEmptyWork = (list) => {
 };
 
 const activateMediaControls = (root = document) => {
-  root.querySelectorAll('[data-scroll-media]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const carousel = button.closest('[data-media-carousel]');
-      const track = carousel?.querySelector('.media-track');
-      const direction = Number(button.dataset.scrollMedia);
-      if (!track || !direction) return;
-      track.scrollBy({ left: direction * track.clientWidth, behavior: 'smooth' });
+  root.querySelectorAll('[data-media-carousel]').forEach((carousel) => {
+    const slides = [...carousel.querySelectorAll('[data-media-slide]')];
+    const status = carousel.querySelector('[data-media-status]');
+    if (!slides.length) return;
+
+    const showSlide = (requestedIndex) => {
+      const index = (requestedIndex + slides.length) % slides.length;
+      carousel.dataset.activeIndex = String(index);
+      slides.forEach((slide, slideIndex) => {
+        const active = slideIndex === index;
+        slide.classList.toggle('is-active', active);
+        slide.setAttribute('aria-hidden', String(!active));
+        if (!active) slide.querySelector('video')?.pause();
+      });
+      if (status) status.textContent = `${index + 1} / ${slides.length}`;
+    };
+
+    carousel.querySelectorAll('[data-media-direction]').forEach((button) => {
+      button.addEventListener('click', () => {
+        showSlide(Number(carousel.dataset.activeIndex) + Number(button.dataset.mediaDirection));
+      });
+    });
+    carousel.querySelector('.media-track')?.addEventListener('keydown', (event) => {
+      if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+      event.preventDefault();
+      showSlide(Number(carousel.dataset.activeIndex) + (event.key === 'ArrowRight' ? 1 : -1));
     });
   });
 };
@@ -157,7 +183,7 @@ const loadWork = async () => {
   if (!workLists.length) return;
 
   try {
-    const response = await fetch(new URL('content/work.json', document.baseURI));
+    const response = await fetch(new URL('content/work.json', siteRoot), { cache: 'no-store' });
     if (!response.ok) throw new Error('Project work could not be loaded.');
     const projects = sortProjects(await response.json());
 

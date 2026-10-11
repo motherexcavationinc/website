@@ -1,1 +1,45 @@
-[]
+[
+  {
+    "title": "Residential dumpster delivery",
+    "description": "Dumpster delivery and pickup for a residential cleanup project.",
+    "services": ["dumpster"],
+    "date": null,
+    "placeholder": false,
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/dumpster/residential-dumpster-delivery/photo-1.png",
+        "alt": "Dumpster placed in a residential driveway"
+      },
+      {
+        "type": "image",
+        "url": "/images/dumpster/residential-dumpster-delivery/photo-2.png",
+        "alt": "Mother Excavation truck delivering a residential dumpster"
+      },
+      {
+        "type": "image",
+        "url": "/images/dumpster/residential-dumpster-delivery/photo-3.png",
+        "alt": "Mother Excavation truck beside a delivered dumpster"
+      }
+    ]
+  },
+  {
+    "title": "Commercial debris dumpster",
+    "description": "Dumpster service for collecting and removing commercial project debris.",
+    "services": ["dumpster"],
+    "date": null,
+    "placeholder": false,
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/dumpster/commercial-debris-dumpster/photo-1.png",
+        "alt": "Commercial debris loaded into a dumpster"
+      },
+      {
+        "type": "image",
+        "url": "/images/dumpster/commercial-debris-dumpster/photo-2.png",
+        "alt": "Mother Excavation truck collecting a commercial dumpster"
+      }
+    ]
+  }
+]
